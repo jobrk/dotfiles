@@ -2,7 +2,7 @@
 set -e
 
 echo "Stowing dotfiles..."
-stow nvim tmux zsh
+stow nvim skhd yabai
 
 echo "Done."
 
