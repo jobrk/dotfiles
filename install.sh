@@ -2,7 +2,7 @@
 set -e
 
 echo "Stowing dotfiles..."
-stow nvim skhd yabai
+stow alacritty nvim skhd yabai
 
 echo "Done."
 
