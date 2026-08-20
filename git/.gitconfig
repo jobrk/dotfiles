@@ -1,0 +1,65 @@
+[delta "catppuccin-mocha"]
+	blame-palette = "#1e1e2e #181825 #11111b #313244 #45475a"
+	commit-decoration-style = "box ul"
+	dark = true
+	file-decoration-style = "#cdd6f4"
+	file-style = "#cdd6f4"
+	hunk-header-decoration-style = "box ul"
+	hunk-header-file-style = "bold"
+	hunk-header-line-number-style = "bold #a6adc8"
+	hunk-header-style = "file line-number syntax"
+	line-numbers = true
+	line-numbers-left-style = "#6c7086"
+	line-numbers-minus-style = "bold #f38ba8"
+	line-numbers-plus-style = "bold #a6e3a1"
+	line-numbers-right-style = "#6c7086"
+	line-numbers-zero-style = "#6c7086"
+	# 25% red 75% base
+	minus-emph-style = "bold syntax #53394c"
+	# 10% red 90% base
+	minus-style = "syntax #34293a"
+	# 25% green 75% base
+	plus-emph-style = "bold syntax #404f4a"
+	# 10% green 90% base
+	plus-style = "syntax #2c333a"
+	# Should match the name of the bat theme
+	syntax-theme = "Catppuccin-mocha"
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore
+    pager = delta
+[user]
+	name = Josh Brooks
+	# email: set per machine in ~/.gitconfig.local
+[http]
+	sslVerify = true
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    side-by-side = true
+    true-color = always
+    features = catppuccin-mocha
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+    colorMoved = default
+
+[fetch]
+    parallel = 20
+[rerere]
+	enabled = true
+[push]
+	autoSetupRemote = true
+[rebase]
+	autostash = true
+	autosquash = true
+[branch]
+	sort = -committerdate
+[include]
+	path = ~/.gitconfig.local
