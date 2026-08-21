@@ -105,6 +105,7 @@ zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 zvm_after_init_commands+=('[ -f ~/.local/share/fzf-git/fzf-git.sh ] && source ~/.local/share/fzf-git/fzf-git.sh')
 
 # ── machine-local (untracked: work config, secrets, host-specific paths) ──────
+[[ -r "$HOME/.config/zsh/secrets.zsh" ]] && source "$HOME/.config/zsh/secrets.zsh"
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # ── p10k config ───────────────────────────────────────────────────────────────

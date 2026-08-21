@@ -1,0 +1,10 @@
+[font]
+size = 18.0
+
+[font.normal]
+family = "IosevkaTerm Nerd Font"
+style = "Medium"
+
+[window]
+decorations = "none"
+option_as_alt = "Both"
