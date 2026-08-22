@@ -10,6 +10,9 @@ plugins=(git tmux fzf-tab zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mod
 source $ZSH/oh-my-zsh.sh
 
 # ── environment ───────────────────────────────────────────────────────────────
+export LANG=en_US.UTF-8
+unset LC_ALL LC_ADDRESS LC_COLLATE LC_CTYPE LC_IDENTIFICATION LC_MEASUREMENT
+unset LC_MESSAGES LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE LC_TIME
 export EDITOR=nvim
 export VISUAL=nvim
 export COLORTERM="truecolor"
