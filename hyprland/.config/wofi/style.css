@@ -1,0 +1,16 @@
+window {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+#input,
+#entry {
+    border: 0;
+    border-radius: 0;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+#entry:selected {
+    background-color: #222222;
+}
