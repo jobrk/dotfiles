@@ -14,7 +14,7 @@ export EDITOR=nvim
 export VISUAL=nvim
 export COLORTERM="truecolor"
 export GOPATH=$HOME/go
-export PATH="$HOME/.local/bin:$GOPATH/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$GOPATH/bin:$PATH"
 export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 export MANPATH=$HOME/.local/share/man:$MANPATH
 
