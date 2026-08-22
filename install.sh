@@ -7,7 +7,10 @@ linux_only=(i3)
 owned=(.zshrc .p10k.zsh .gitconfig .gitignore .tmux.conf)
 
 if [[ "$(uname -s)" == "Linux" ]]; then
-    owned+=(.dmrc .config/i3/config)
+    owned+=(.dmrc)
+    if [[ ! -L "$HOME/.config/i3" ]]; then
+        owned+=(.config/i3/config)
+    fi
 fi
 
 # Replace files owned by these dotfiles. Configuration directories are left
