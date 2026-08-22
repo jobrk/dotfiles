@@ -30,7 +30,7 @@ export FZF_DEFAULT_OPTS=" \
 alias fzf="fzf --height=20% --reverse --info=inline"
 
 # ── bat ───────────────────────────────────────────────────────────────────────
-export BAT_THEME="Catppuccin Mocha"
+export BAT_THEME="Catppuccin-mocha"
 
 # ── aliases: git ──────────────────────────────────────────────────────────────
 alias ga="git add"
