@@ -1,45 +1,59 @@
 #!/usr/bin/env bash
 
-if [[ $# -eq 1 ]]; then
-    selected=$1
-else
-    paths_file="$HOME/.config/sessionizer/paths"
-    search_dirs=()
+normalize_path() {
+    local path
+    path=$(sed 's/^[[:space:]]*//; s/[[:space:]]*$//' <<< "$1")
+    case $path in
+        ''|\#*) return 1 ;;
+        '~') path=$HOME ;;
+        '~/'*) path="$HOME/${path#\~/}" ;;
+    esac
+    [[ -d $path ]] || return 1
+    printf '%s\n' "$path"
+}
+
+select_directory() {
+    local paths_file="$HOME/.config/sessionizer/paths"
+    local search_dir
+    local search_dirs=()
+
+    if [[ $# -eq 1 ]]; then
+        printf '%s\n' "$1"
+        return
+    fi
 
     if [[ -f $paths_file ]]; then
         while IFS= read -r search_dir || [[ -n $search_dir ]]; do
-            search_dir="${search_dir#"${search_dir%%[![:space:]]*}"}"
-            search_dir="${search_dir%"${search_dir##*[![:space:]]}"}"
-            [[ -z $search_dir || $search_dir == \#* ]] && continue
-            [[ $search_dir == '~' ]] && search_dir="$HOME"
-            [[ $search_dir == '~/'* ]] && search_dir="$HOME/${search_dir#\~/}"
-            [[ -d $search_dir ]] && search_dirs+=("$search_dir")
+            if search_dir=$(normalize_path "$search_dir"); then
+                search_dirs+=("$search_dir")
+            fi
         done < "$paths_file"
     fi
-
     [[ ${#search_dirs[@]} -eq 0 ]] && search_dirs=("$HOME")
-    selected=$(
-        for search_dir in "${search_dirs[@]}"; do
-            find "$search_dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null
-        done | fzf
-    )
-fi
 
-if [[ -z $selected ]]; then
-    exit 0
-fi
+    for search_dir in "${search_dirs[@]}"; do
+        find "$search_dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null
+    done | fzf
+}
 
-selected_name=$(basename "$selected" | tr . _)
+open_session() {
+    local selected=$1
+    local session_name
+    session_name=$(basename "$selected")
+    session_name=${session_name//./_}
 
-if [[ -z ${TMUX:-} ]]; then
-    if tmux has-session -t "=$selected_name" 2>/dev/null; then
-        exec tmux attach-session -t "=$selected_name"
+    if [[ -z ${TMUX:-} ]]; then
+        if tmux has-session -t "=$session_name" 2>/dev/null; then
+            exec tmux attach-session -t "=$session_name"
+        fi
+        exec tmux new-session -s "$session_name" -c "$selected"
     fi
-    exec tmux new-session -s "$selected_name" -c "$selected"
-fi
 
-if ! tmux has-session -t "=$selected_name" 2>/dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
-fi
+    if ! tmux has-session -t "=$session_name" 2>/dev/null; then
+        tmux new-session -ds "$session_name" -c "$selected"
+    fi
+    tmux switch-client -t "=$session_name"
+}
 
-tmux switch-client -t "=$selected_name"
+selected=$(select_directory "$@")
+[[ -z $selected ]] || open_session "$selected"
