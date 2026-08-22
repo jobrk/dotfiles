@@ -93,32 +93,6 @@ alias p="pnpm"
 alias pi="pnpm install"
 alias pnd="pnpm run dev"
 
-# ── lazy-loaded toolchains ────────────────────────────────────────────────────
-# conda: only initialize when first invoked (saves ~930ms startup)
-conda() {
-  unfunction conda 2>/dev/null
-  __conda_setup="$('/opt/miniconda/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
-  if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-  else
-    if [ -f "/opt/miniconda/etc/profile.d/conda.sh" ]; then
-      . "/opt/miniconda/etc/profile.d/conda.sh"
-    else
-      export PATH="/opt/miniconda/bin:$PATH"
-    fi
-  fi
-  unset __conda_setup
-  conda "$@"
-}
-
-# SDKMAN: only initialize when first invoked (saves ~137ms startup)
-export SDKMAN_DIR="$HOME/.sdkman"
-sdk() {
-  unfunction sdk 2>/dev/null
-  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-  sdk "$@"
-}
-
 # ── hooks & integrations ──────────────────────────────────────────────────────
 command -v fnm > /dev/null && eval "$(fnm env --shell zsh --corepack-enabled)"
 command -v direnv > /dev/null && eval "$(direnv hook zsh)"
