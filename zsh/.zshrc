@@ -32,6 +32,7 @@ unset java_home
 for dotnet_root in /opt/homebrew/opt/dotnet/libexec /usr/local/opt/dotnet/libexec; do
   if [[ -d "$dotnet_root" ]]; then
     export DOTNET_ROOT="$dotnet_root"
+    export PATH="$DOTNET_ROOT:$PATH"
     break
   fi
 done
