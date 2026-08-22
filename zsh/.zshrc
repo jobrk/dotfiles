@@ -100,6 +100,7 @@ sdk() {
 }
 
 # ── hooks & integrations ──────────────────────────────────────────────────────
+command -v fnm > /dev/null && eval "$(fnm env --shell zsh --corepack-enabled)"
 command -v direnv > /dev/null && eval "$(direnv hook zsh)"
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 zvm_after_init_commands+=('[ -f ~/.local/share/fzf-git/fzf-git.sh ] && source ~/.local/share/fzf-git/fzf-git.sh')
