@@ -18,6 +18,25 @@ export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$GOPATH/bin:$PATH"
 export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 export MANPATH=$HOME/.local/share/man:$MANPATH
 
+# Homebrew's versioned JDK is keg-only; make the LTS toolchain the default.
+for java_home in /opt/homebrew/opt/openjdk@25 /usr/local/opt/openjdk@25; do
+  if [[ -d "$java_home" ]]; then
+    export JAVA_HOME="$java_home"
+    export PATH="$JAVA_HOME/bin:$PATH"
+    break
+  fi
+done
+unset java_home
+
+# Homebrew's .NET formula keeps the SDK under libexec.
+for dotnet_root in /opt/homebrew/opt/dotnet/libexec /usr/local/opt/dotnet/libexec; do
+  if [[ -d "$dotnet_root" ]]; then
+    export DOTNET_ROOT="$dotnet_root"
+    break
+  fi
+done
+unset dotnet_root
+
 # ── fzf ───────────────────────────────────────────────────────────────────────
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

@@ -4,12 +4,25 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     paths_file="$HOME/.config/sessionizer/paths"
+    search_dirs=()
+
     if [[ -f $paths_file ]]; then
-        dirs=$(sed "s|^~|$HOME|" "$paths_file" | tr '\n' ' ')
-    else
-        dirs="$HOME"
+        while IFS= read -r search_dir || [[ -n $search_dir ]]; do
+            search_dir="${search_dir#"${search_dir%%[![:space:]]*}"}"
+            search_dir="${search_dir%"${search_dir##*[![:space:]]}"}"
+            [[ -z $search_dir || $search_dir == \#* ]] && continue
+            [[ $search_dir == '~' ]] && search_dir="$HOME"
+            [[ $search_dir == '~/'* ]] && search_dir="$HOME/${search_dir#\~/}"
+            [[ -d $search_dir ]] && search_dirs+=("$search_dir")
+        done < "$paths_file"
     fi
-    selected=$(eval find $dirs -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf)
+
+    [[ ${#search_dirs[@]} -eq 0 ]] && search_dirs=("$HOME")
+    selected=$(
+        for search_dir in "${search_dirs[@]}"; do
+            find "$search_dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null
+        done | fzf
+    )
 fi
 
 if [[ -z $selected ]]; then
@@ -17,16 +30,16 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
-    exit 0
+if [[ -z ${TMUX:-} ]]; then
+    if tmux has-session -t "=$selected_name" 2>/dev/null; then
+        exec tmux attach-session -t "=$selected_name"
+    fi
+    exec tmux new-session -s "$selected_name" -c "$selected"
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t "=$selected_name" 2>/dev/null; then
+    tmux new-session -ds "$selected_name" -c "$selected"
 fi
 
-tmux switch-client -t $selected_name
-
+tmux switch-client -t "=$selected_name"
