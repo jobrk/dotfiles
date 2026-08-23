@@ -1,0 +1,58 @@
+@import "mocha.css";
+
+* {
+    border: 0;
+    border-radius: 0;
+    font-family: "IosevkaTerm Nerd Font";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #000000;
+    color: @text;
+}
+
+#workspaces button {
+    background: transparent;
+    color: @overlay1;
+    padding: 0 8px;
+}
+
+#workspaces button.active {
+    color: @mauve;
+}
+
+#window,
+#network,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+    background: transparent;
+    padding: 0 8px;
+}
+
+#network {
+    color: @teal;
+}
+
+#pulseaudio {
+    color: @peach;
+}
+
+#battery {
+    color: @green;
+}
+
+#battery.warning {
+    color: @yellow;
+}
+
+#battery.critical {
+    color: @red;
+}
+
+#clock {
+    color: @blue;
+}

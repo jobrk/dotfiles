@@ -1,16 +1,24 @@
 window {
     background-color: #000000;
-    color: #ffffff;
+    color: #cdd6f4;
 }
 
-#input,
+#input {
+    border: 0;
+    border-bottom: 2px solid #cba6f7;
+    border-radius: 0;
+    background-color: #000000;
+    color: #cdd6f4;
+}
+
 #entry {
     border: 0;
     border-radius: 0;
     background-color: #000000;
-    color: #ffffff;
+    color: #cdd6f4;
 }
 
 #entry:selected {
-    background-color: #222222;
+    background-color: #000000;
+    color: #cba6f7;
 }

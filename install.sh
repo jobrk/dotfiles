@@ -18,6 +18,12 @@ if [[ "$(uname -s)" == "Linux" ]]; then
     if [[ ! -L "$HOME/.config/wofi" ]]; then
         owned+=(.config/wofi/style.css)
     fi
+    if [[ ! -L "$HOME/.config/waybar" ]]; then
+        owned+=(.config/waybar/config.jsonc .config/waybar/mocha.css .config/waybar/style.css)
+    fi
+    if [[ ! -L "$HOME/.config/mako" ]]; then
+        owned+=(.config/mako/config)
+    fi
 fi
 
 # Replace files owned by these dotfiles. Configuration directories are left
