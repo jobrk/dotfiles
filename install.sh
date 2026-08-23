@@ -7,7 +7,7 @@ linux_only=(hyprland)
 owned=(.zshrc .p10k.zsh .gitconfig .gitignore .tmux.conf)
 
 if [[ ! -L "$HOME/.config/zen" ]]; then
-    owned+=(.config/zen/policies.json)
+    owned+=(.config/zen/autoconfig.js .config/zen/jobrk.cfg .config/zen/policies.json)
 fi
 
 if [[ "$(uname -s)" == "Linux" ]]; then

@@ -15,68 +15,6 @@
                 "install_url": "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi",
                 "default_area": "navbar"
             }
-        },
-        "Preferences": {
-            "browser.newtabpage.activity-stream.system.showWeatherOptIn": {
-                "Value": false,
-                "Status": "default"
-            },
-            "browser.theme.toolbar-theme": {
-                "Value": 0,
-                "Status": "default",
-                "Type": "number"
-            },
-            "browser.translations.neverTranslateLanguages": {
-                "Value": "fr",
-                "Status": "default"
-            },
-            "browser.urlbar.suggest.quicksuggest.sponsored": {
-                "Value": false,
-                "Status": "default"
-            },
-            "layout.css.prefers-color-scheme.content-override": {
-                "Value": 0,
-                "Status": "default",
-                "Type": "number"
-            },
-            "network.dns.disablePrefetch": {
-                "Value": true,
-                "Status": "default"
-            },
-            "network.http.speculative-parallel-limit": {
-                "Value": 0,
-                "Status": "default",
-                "Type": "number"
-            },
-            "network.prefetch-next": {
-                "Value": false,
-                "Status": "default"
-            },
-            "sidebar.visibility": {
-                "Value": "hide-sidebar",
-                "Status": "default"
-            },
-            "zen.glance.enabled": {
-                "Value": false,
-                "Status": "default"
-            },
-            "zen.swipe.is-fast-swipe": {
-                "Value": false,
-                "Status": "default"
-            },
-            "zen.tabs.vertical.right-side": {
-                "Value": true,
-                "Status": "default"
-            },
-            "zen.theme.content-element-separation": {
-                "Value": 0,
-                "Status": "default",
-                "Type": "number"
-            },
-            "zen.view.compact.enable-at-startup": {
-                "Value": true,
-                "Status": "default"
-            }
         }
     }
 }
