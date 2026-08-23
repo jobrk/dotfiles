@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-common=(zsh git tmux alacritty bat scripts nvim)
+common=(zsh git tmux alacritty bat scripts nvim zen)
 darwin_only=(skhd yabai)
 linux_only=(hyprland)
 owned=(.zshrc .p10k.zsh .gitconfig .gitignore .tmux.conf)
+
+if [[ ! -L "$HOME/.config/zen" ]]; then
+    owned+=(.config/zen/policies.json)
+fi
 
 if [[ "$(uname -s)" == "Linux" ]]; then
     # Remove links from the retired i3 package after pulling this repository.
