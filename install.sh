@@ -11,10 +11,6 @@ if [[ ! -L "$HOME/.config/zen" ]]; then
 fi
 
 if [[ "$(uname -s)" == "Linux" ]]; then
-    # Remove links from the retired i3 package after pulling this repository.
-    [[ -L "$HOME/.config/i3" ]] && rm "$HOME/.config/i3"
-    [[ -L "$HOME/.dmrc" && ! -e "$HOME/.dmrc" ]] && rm "$HOME/.dmrc"
-
     owned+=(.dmrc)
     if [[ ! -L "$HOME/.config/hypr" ]]; then
         owned+=(.config/hypr/hyprland.conf .config/hypr/hypridle.conf .config/hypr/hyprlock.conf)
