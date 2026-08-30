@@ -1,0 +1,38 @@
+# Match the Alacritty Catppuccin palette while keeping the terminal background black.
+palette = 0=#45475A
+palette = 1=#F38BA8
+palette = 2=#A6E3A1
+palette = 3=#F9E2AF
+palette = 4=#89B4FA
+palette = 5=#F5C2E7
+palette = 6=#94E2D5
+palette = 7=#BAC2DE
+palette = 8=#585B70
+palette = 9=#F38BA8
+palette = 10=#A6E3A1
+palette = 11=#F9E2AF
+palette = 12=#89B4FA
+palette = 13=#F5C2E7
+palette = 14=#94E2D5
+palette = 15=#A6ADC8
+palette = 16=#FAB387
+palette = 17=#F5E0DC
+
+background = #000000
+foreground = #CDD6F4
+cursor-color = #F5E0DC
+cursor-text = #1E1E2E
+selection-background = #F5E0DC
+selection-foreground = #1E1E2E
+search-background = #A6ADC8
+search-foreground = #1E1E2E
+search-selected-background = #A6E3A1
+search-selected-foreground = #1E1E2E
+
+mouse-hide-while-typing = true
+keybind = ctrl+6=text:\x1e
+
+# Keep xterm-ghostty working through sudo and SSH when remote terminfo is absent.
+shell-integration-features = sudo,ssh-env,ssh-terminfo
+
+config-file = ?local.ghostty

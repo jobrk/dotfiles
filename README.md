@@ -25,6 +25,7 @@ these on provision (`force: false`, so edits survive re-runs):
 | `git/.gitconfig` | `~/.gitconfig.local` (identity lives here) |
 | `tmux/.tmux.conf` | `~/.tmux.local.conf` |
 | `alacritty/…/alacritty.toml` | `~/.config/alacritty/local.toml` (font) |
+| `ghostty/…/config.ghostty` | `~/.config/ghostty/local.ghostty` (font/window) |
 | `scripts/…/tmux-sessionizer` | `~/.config/sessionizer/paths` |
 
 `templates/secrets.zsh.example` → `~/.config/zsh/secrets.zsh` is copied by hand
@@ -37,6 +38,7 @@ these on provision (`force: false`, so edits survive re-runs):
   track a .gitignore it would otherwise skip)
 - `tmux` — .tmux.conf (plugins via tpm)
 - `alacritty` — colors/keys; font+window per machine via local.toml
+- `ghostty` — colors/keys/integration; font+window per machine via local.ghostty
 - `bat` — catppuccin themes
 - `scripts` — tmux-sessionizer
 - `nvim` — submodule → [jobrk/neovim-config](https://github.com/jobrk/neovim-config)
