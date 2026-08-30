@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-common=(zsh git tmux alacritty ghostty bat direnv scripts nvim zen)
+common=(zsh git tmux ghostty bat direnv scripts nvim zen)
 darwin_only=(skhd yabai)
 linux_only=(hyprland)
 owned=(.zshrc .p10k.zsh .gitconfig .gitignore .tmux.conf)
