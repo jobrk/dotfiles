@@ -1,4 +1,4 @@
-# Match the Alacritty Catppuccin palette while keeping the terminal background black.
+# Catppuccin Mocha palette with a black terminal background.
 palette = 0=#45475A
 palette = 1=#F38BA8
 palette = 2=#A6E3A1

@@ -24,7 +24,6 @@ targets=(
   .gitconfig
   .gitignore
   .tmux.conf
-  .config/alacritty
   .config/ghostty
   .config/bat
   .config/direnv

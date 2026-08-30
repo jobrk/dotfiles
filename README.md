@@ -24,7 +24,6 @@ these on provision (`force: false`, so edits survive re-runs):
 | `zsh/.zshrc` | `~/.zshrc.local` |
 | `git/.gitconfig` | `~/.gitconfig.local` (identity lives here) |
 | `tmux/.tmux.conf` | `~/.tmux.local.conf` |
-| `alacritty/…/alacritty.toml` | `~/.config/alacritty/local.toml` (font) |
 | `ghostty/…/config.ghostty` | `~/.config/ghostty/local.ghostty` (font/window) |
 | `scripts/…/tmux-sessionizer` | `~/.config/sessionizer/paths` |
 
@@ -37,7 +36,6 @@ these on provision (`force: false`, so edits survive re-runs):
 - `git` — .gitconfig, global .gitignore (`.stow-local-ignore` makes stow
   track a .gitignore it would otherwise skip)
 - `tmux` — .tmux.conf (plugins via tpm)
-- `alacritty` — colors/keys; font+window per machine via local.toml
 - `ghostty` — colors/keys/integration; font+window per machine via local.ghostty
 - `bat` — catppuccin themes
 - `scripts` — tmux-sessionizer
