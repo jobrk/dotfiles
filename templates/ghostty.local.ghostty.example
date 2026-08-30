@@ -1,0 +1,10 @@
+# Machine-specific Ghostty font and window settings belong here.
+font-family = BerkeleyMono Nerd Font
+font-style = ExtraCondensed
+font-style-bold = ExtraCondensed ExtraBold
+font-style-italic = ExtraCondensed Oblique
+font-style-bold-italic = ExtraCondensed ExtraBold Oblique
+font-size = 18
+
+window-decoration = none
+macos-option-as-alt = true
