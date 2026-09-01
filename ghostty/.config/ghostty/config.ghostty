@@ -30,6 +30,7 @@ search-selected-background = #A6E3A1
 search-selected-foreground = #1E1E2E
 
 mouse-hide-while-typing = true
+window-padding-balance = true
 keybind = ctrl+6=text:\x1e
 
 # Keep xterm-ghostty working through sudo and SSH when remote terminfo is absent.
