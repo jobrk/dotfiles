@@ -52,3 +52,20 @@ left alone so stow merges into them.
 The zsh config sources `~/.local/share/fzf-git/fzf-git.sh` when present
 ([junegunn/fzf-git.sh](https://github.com/junegunn/fzf-git.sh), the `<C-g>`
 git pickers listed by `gcheat`). Ansible clones it — it is not vendored here.
+
+## Neovim
+
+After stowing, install the editor's plugins, parsers and language tools, then
+run its checks:
+
+```sh
+~/.config/nvim/provision.sh
+~/.config/nvim/check.sh
+```
+
+See the [Neovim README](nvim/.config/nvim/README.md) for runtime prerequisites,
+language support and update instructions. The Neovim config is a separate
+repository: push its commits first, then commit and push the
+`nvim/.config/nvim` submodule pointer here. After pulling dotfiles, use
+`git submodule update --init --recursive` to check out the recorded config,
+then run the commands above.
