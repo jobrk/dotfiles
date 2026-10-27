@@ -52,9 +52,12 @@ and Spotify to 3 using Alt-Shift-number.
 3. Save the existing window/Space arrangement, then consolidate ordinary windows
    onto one native macOS desktop per display while yabai still runs. Native
    Spaces do not become AeroSpace workspaces. Keep the old Spaces for rollback.
-4. Stop and disable the old services before restarting Dock:
+4. Clear yabai's effects so the new journal saves the apps' normal appearance,
+   then stop and disable the old services before restarting Dock:
 
    ```sh
+   yabai -m config window_opacity off
+   yabai -m config window_shadow on
    skhd --stop-service
    yabai --stop-service
    launchctl disable "gui/$(id -u)/com.koekeishiya.skhd"
