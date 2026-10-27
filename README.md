@@ -46,7 +46,8 @@ these on provision (`force: false`, so edits survive re-runs):
   [migration, controls, and limitations](aerospace/README.md)
 - `window-effects` — shadow and opacity policy for
   [Window Effects](https://github.com/jobrk/window-effects)
-- `skhd`, `yabai` — retained for manual rollback; no longer stowed by default
+
+The retired `skhd` and `yabai` packages remain in Git history at `728257d`.
 
 `install.sh` stows `common` everywhere, then `hyprland` on Linux or
 `aerospace` and `window-effects` on macOS. Files it owns (`.zshrc`, `.gitconfig`, …) are removed

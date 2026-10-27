@@ -1,6 +1,6 @@
 # AeroSpace desktop
 
-The configuration replaces the current skhd shortcuts and yabai tiling with
+The configuration replaces skhd shortcuts and yabai tiling with
 AeroSpace 0.21.3-Beta or newer. Ansible installs the app and sets macOS preferences;
 this package owns `~/.config/aerospace/aerospace.toml`. No yabai or skhd dependency
 is needed for this profile.
@@ -43,7 +43,7 @@ and Spotify to 3 using Alt-Shift-number.
 
    Move an existing `~/.aerospace.toml` aside first: AeroSpace rejects ambiguous
    config locations. Review Stow conflicts instead of overwriting local files.
-   Existing yabai/skhd links can stay for rollback.
+   Archive any existing yabai/skhd configuration before retiring it.
 2. Install [Window Effects](https://github.com/jobrk/window-effects) with Ansible's
    `window-effects` tag and `window_effects_enabled=true`. Enable
    `window_effects_autoload=true` for recovery after Dock restarts. This requires
@@ -81,8 +81,8 @@ and Spotify to 3 using Alt-Shift-number.
    Both apps now start at login. Ansible's `desktop_activate=true` can start them
    on subsequent provisions, but refuses while yabai/skhd are running. Native
    dragging may require relaunching existing apps or logging out/in.
-6. Send Ghostty to workspace 1, Zen to 2 and Spotify to 3. Test the controls below.
-   Keep the old packages until the new desktop has passed daily-use checks.
+6. Send Ghostty to workspace 1, Zen to 2 and Spotify to 3. Test the controls below,
+   then run the explicit cleanup when ready to retire the old desktop.
 
 The full installer selects both desktop packages on macOS. Stowing configuration
 alone does not start or stop any services.
@@ -103,14 +103,36 @@ alone does not start or stop any services.
 - **Hover focus:** test native browser/video fullscreen and popups. If focus jumps,
   set `focus-follows-mouse.enabled = false` and reload.
 
-Before relying on this on macOS 27, test Ghostty, Zen and Spotify; opening and
-closing windows; all numbered workspaces; sending without following; hover
-focus and Preferences dialogs; both resize axes; sleep/wake; and external-display
-disconnect/reconnect. Check desktop widgets after restarting AeroSpace and any
-apps that use script/Java launchers. No macOS 27 runtime test has been performed
-as part of this configuration migration.
+Core integration is verified on macOS 27.2 (26B123), including shadows, opacity,
+restoration and Dock recovery; see the
+[compatibility record](https://github.com/jobrk/window-effects/blob/main/COMPATIBILITY.md).
+Sleep/wake, external-display reconnection, physical mouse gestures and native
+fullscreen/popups still need interactive testing. Check applications that use
+script/Java launchers: AeroSpace can miss their windows.
+
+## Retire the old desktop
+
+After cutover, archive any local legacy configuration, then run from the Ansible
+checkout:
+
+```sh
+ansible-playbook -i inventory.ini main.yml --tags desktop-cleanup --ask-become-pass
+```
+
+This explicit tag requires the old daemons to be stopped and the new desktop to
+respond. It removes yabai/skhd packages, their LaunchAgents, their former Stow
+links, `/Library/ScriptingAdditions/yabai.osax` and `/etc/sudoers.d/yabai`.
+Custom configuration directories and native Spaces are left intact. It does not
+change SIP or Window Effects' files and autoload rule. Normal provisioning does
+not run cleanup.
 
 ## Rollback
+
+After retirement, rollback requires reinstalling yabai/skhd and recovering their
+configurations. Their last tracked versions are available with
+`git archive 728257d yabai skhd | tar -x` from this checkout; use the private
+backup instead if there were local edits. Reinstall the packages before the
+legacy service commands below.
 
 Stop the appearance watcher first and restore its saved state:
 
@@ -123,19 +145,20 @@ launchctl disable "gui/$(id -u)/local.window-effects"
 If the backend is unavailable, load it before running restore. Set
 `start-at-login = false` in the AeroSpace config and reload it. Run
 `aerospace enable off` to bring hidden windows onscreen, then quit AeroSpace from
-its menu. Restart the old services:
+its menu. After reinstalling the old packages and recovering their configs,
+restore their configuration links and start the services:
 
 ```sh
+stow --target="$HOME" skhd yabai
 launchctl enable "gui/$(id -u)/com.koekeishiya.skhd"
 launchctl enable "gui/$(id -u)/com.asmvik.yabai"
 skhd --start-service
 yabai --start-service
 ```
 
-If the legacy configuration links were removed, restore them with
-`stow --target="$HOME" skhd yabai` from this repo. Native Space placement may need
-manual restoration. Keep the old packages and config through the trial. Nothing
-in this migration edits SIP or the existing yabai sudoers entry. To remove the
+Native Space placement may need manual restoration.
+The removed scripting addition and its sudoers rule must also be reinstalled if
+the old configuration needs them. Nothing in this migration edits SIP. To remove the
 Window Effects loader and its autoload rule, use its `scripts/uninstall-backend.sh`
 with sudo after stopping the watcher and restoring effects. Restart Dock to unload
 its resident code. Do not re-enable SIP while continuing to use Window Effects.
