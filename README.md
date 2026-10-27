@@ -27,6 +27,10 @@ these on provision (`force: false`, so edits survive re-runs):
 | `ghostty/…/config.ghostty` | `~/.config/ghostty/local.ghostty` (font/window) |
 | `scripts/…/tmux-sessionizer` | `~/.config/sessionizer/paths` |
 
+For public commits, set `user.email` in `~/.gitconfig.local` to the GitHub
+`noreply` address shown in [email settings](https://github.com/settings/emails).
+This affects future commits; existing commit metadata is unchanged.
+
 `templates/secrets.zsh.example` → `~/.config/zsh/secrets.zsh` is copied by hand
 (chmod 600), never by ansible.
 

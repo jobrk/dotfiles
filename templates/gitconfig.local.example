@@ -1,2 +1,3 @@
 [user]
+	# Use your GitHub noreply address from https://github.com/settings/emails.
 	email = you@example.com
