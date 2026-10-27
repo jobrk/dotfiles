@@ -81,8 +81,9 @@ and Spotify to 3 using Alt-Shift-number.
    Both apps now start at login. Ansible's `desktop_activate=true` can start them
    on subsequent provisions, but refuses while yabai/skhd are running. Native
    dragging may require relaunching existing apps or logging out/in.
-6. Send Ghostty to workspace 1, Zen to 2 and Spotify to 3. Test the controls below,
-   then run the explicit cleanup when ready to retire the old desktop.
+6. Send Ghostty to workspace 1, Zen to 2 and Spotify to 3. Test the controls below.
+   Retiring an existing setup is a separate manual task; Ansible provisions new
+   machines and does not remove legacy packages or configuration.
 
 The full installer selects both desktop packages on macOS. Stowing configuration
 alone does not start or stop any services.
@@ -109,22 +110,6 @@ restoration and Dock recovery; see the
 Sleep/wake, external-display reconnection, physical mouse gestures and native
 fullscreen/popups still need interactive testing. Check applications that use
 script/Java launchers: AeroSpace can miss their windows.
-
-## Retire the old desktop
-
-After cutover, archive any local legacy configuration, then run from the Ansible
-checkout:
-
-```sh
-ansible-playbook -i inventory.ini main.yml --tags desktop-cleanup --ask-become-pass
-```
-
-This explicit tag requires the old daemons to be stopped and the new desktop to
-respond. It removes yabai/skhd packages, their LaunchAgents, their former Stow
-links, `/Library/ScriptingAdditions/yabai.osax` and `/etc/sudoers.d/yabai`.
-Custom configuration directories and native Spaces are left intact. It does not
-change SIP or Window Effects' files and autoload rule. Normal provisioning does
-not run cleanup.
 
 ## Rollback
 
