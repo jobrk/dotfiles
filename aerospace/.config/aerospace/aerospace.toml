@@ -1,0 +1,69 @@
+# AeroSpace 0.21.3-Beta or newer. See aerospace/README.md for migration and limits.
+config-version = 2
+start-at-login = true
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+# Preserve hover focus without moving the pointer when keyboard focus changes.
+focus-follows-mouse.enabled = true
+on-focused-monitor-changed = []
+
+on-window-detected = [
+    { if = 'test %{app-bundle-id} = com.apple.systempreferences', run = 'layout floating' },
+    { if = 'test %{app-bundle-id} = com.apple.SystemProfiler', run = 'layout floating' },
+    { if = 'test %{window-title} ~= Preferences$', run = 'layout floating' },
+]
+
+[gaps]
+inner.horizontal = 6
+inner.vertical = 6
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 0
+
+[mode.main.binding]
+alt-p = 'focus-monitor left'
+alt-n = 'focus-monitor right'
+
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+# Send without following, as with the existing skhd bindings.
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+
+alt-f = 'fullscreen'
+alt-b = 'balance-sizes'
+alt-d = 'layout floating tiling'
+# Reload settings; unlike the old binding this does not restart the process.
+alt-shift-r = 'reload-config'
+
+# Tiled-window resizing, replacing Ctrl-right-drag. Floating windows use edges.
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+alt-shift-minus = 'resize smart-opposite -50'
+alt-shift-equal = 'resize smart-opposite +50'
+
+# Container controls for layouts that yabai's BSP previously built automatically.
+alt-slash = 'layout tiles horizontal vertical'
+alt-shift-h = 'join-with left'
+alt-shift-j = 'join-with down'
+alt-shift-k = 'join-with up'
+alt-shift-l = 'join-with right'

@@ -42,10 +42,14 @@ these on provision (`force: false`, so edits survive re-runs):
 - `nvim` — submodule → [jobrk/neovim-config](https://github.com/jobrk/neovim-config)
 - `zen` — Zen Browser policies + portable prefs
 - `hyprland` — Linux desktop: hypr, waybar, wofi, mako, .dmrc
-- `skhd`, `yabai` — macOS window management
+- `aerospace` — macOS window management and shortcuts; see
+  [migration, controls, and limitations](aerospace/README.md)
+- `window-effects` — shadow and opacity policy for
+  [Window Effects](https://github.com/jobrk/window-effects)
+- `skhd`, `yabai` — retained for manual rollback; no longer stowed by default
 
 `install.sh` stows `common` everywhere, then `hyprland` on Linux or
-`skhd`/`yabai` on macOS. Files it owns (`.zshrc`, `.gitconfig`, …) are removed
+`aerospace` and `window-effects` on macOS. Files it owns (`.zshrc`, `.gitconfig`, …) are removed
 if they exist as real files, so stow can link them; config *directories* are
 left alone so stow merges into them.
 

@@ -33,7 +33,7 @@ targets=(
 )
 
 if [[ $(uname -s) == Darwin ]]; then
-  targets+=(.config/skhd .config/yabai)
+  targets+=(.config/aerospace .config/window-effects)
 else
   targets+=(.dmrc .config/hypr .config/mako .config/waybar .config/wofi)
 fi

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 common=(zsh git tmux ghostty bat direnv scripts nvim zen)
-darwin_only=(skhd yabai)
+darwin_only=(aerospace window-effects)
 linux_only=(hyprland)
 owned=(.zshrc .p10k.zsh .gitconfig .gitignore .tmux.conf)
 

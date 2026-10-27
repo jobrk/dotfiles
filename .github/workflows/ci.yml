@@ -9,15 +9,29 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
         with:
           submodules: recursive
 
-      - name: Install Stow
+      - name: Install Stow (Linux)
+        if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install --yes stow
+
+      - name: Install Stow (macOS)
+        if: runner.os == 'macOS'
+        run: brew install stow
+
+      - name: Validate AeroSpace TOML
+        run: python3 -c 'import pathlib, tomllib; tomllib.loads(pathlib.Path("aerospace/.config/aerospace/aerospace.toml").read_text())'
+
+      - name: Validate appearance policy JSON
+        run: python3 -m json.tool window-effects/.config/window-effects/config.json > /dev/null
 
       - name: Test dotfiles
         run: ./tests/smoke.sh
