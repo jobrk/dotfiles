@@ -65,11 +65,11 @@ git pickers listed by `gcheat`). Ansible clones it — it is not vendored here.
 ## Neovim
 
 After stowing, install the editor's plugins, parsers and language tools, then
-run its checks:
+open Neovim's health report:
 
 ```sh
 ~/.config/nvim/provision.sh
-~/.config/nvim/check.sh
+nvim '+checkhealth'
 ```
 
 See the [Neovim README](nvim/.config/nvim/README.md) for runtime prerequisites,
@@ -78,3 +78,10 @@ repository: push its commits first, then commit and push the
 `nvim/.config/nvim` submodule pointer here. After pulling dotfiles, use
 `git submodule update --init --recursive` to check out the recorded config,
 then run the commands above.
+
+## License
+
+Personal configuration is available under the [MIT License](LICENSE).
+Bundled Catppuccin themes and colors retain the [Catppuccin notice](licenses/catppuccin.txt).
+The generated Powerlevel10k configuration retains its [upstream notice](licenses/powerlevel10k.txt).
+The Neovim submodule and installed third-party tools retain their own licenses.
