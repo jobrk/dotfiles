@@ -13,7 +13,7 @@ on-focused-monitor-changed = []
 on-window-detected = [
     { if = 'test %{app-bundle-id} = com.apple.systempreferences', run = 'layout floating' },
     { if = 'test %{app-bundle-id} = com.apple.SystemProfiler', run = 'layout floating' },
-    { if = 'test %{window-title} ~= Preferences$', run = 'layout floating' },
+    { if = 'test %{window-title} ~= "Preferences$"', run = 'layout floating' },
 ]
 
 [gaps]
